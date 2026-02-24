@@ -16,10 +16,10 @@ const db = new sqlite3.Database("./database.db");
 
 db.serialize(() => {
   db.run(
-    "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, email TEXT, password TEXT)"
+    "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, email TEXT, password TEXT)",
   );
   db.run(
-    "CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY, email TEXT, note TEXT)"
+    "CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY, email TEXT, note TEXT)",
   );
 });
 
@@ -32,7 +32,7 @@ app.post("/register", (req, res) => {
       email +
       "','" +
       password +
-      "')"
+      "')",
   );
 
   res.json({ message: "User registered" });
@@ -53,7 +53,7 @@ app.post("/login", (req, res) => {
       } else {
         res.status(401).json({ message: "Invalid credentials" });
       }
-    }
+    },
   );
 });
 
@@ -66,7 +66,7 @@ app.post("/add-note", (req, res) => {
       email +
       "','" +
       note +
-      "')"
+      "')",
   );
 
   res.json({ message: "Note added" });
@@ -79,7 +79,7 @@ app.get("/notes", (req, res) => {
     "SELECT * FROM notes WHERE email = '" + email + "'",
     (err, rows) => {
       res.json(rows);
-    }
+    },
   );
 });
 
